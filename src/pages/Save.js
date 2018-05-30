@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import '../index.css';
-import Save from './Save';
+// import SavedMenu from '../components/SavedMenu';
 import Header from '../components/Header';
 import axios from 'axios';
-import { Redirect, Link } from 'react-router-dom'
 
 // const Qty = (props) => {
 // 	console.log(props)
@@ -20,28 +19,10 @@ import { Redirect, Link } from 'react-router-dom'
 
 class NewMenu extends Component{
 	constructor(props) {
-    super(props);
-	    this.state = {
-	    numberOfGuests: null,
-	    cheese: false,
-	    olives: false,
-	    antipasti: false,
-	    crostini: false,
-	    chicken: false,
-	    turkey: false,
-	    steak: false,
-	    ham: false,
-	    soup: false,
-	    salad: false,
-	    rolls: false,
-	    pie: false,
-	    icecream: false,
-	    cake: false,
-	    custard: false,
-	    red: false,
-	    white: false,
+    super(props)
 
-	    };
+
+	    console.log(props)
 
   }
 
@@ -61,14 +42,12 @@ class NewMenu extends Component{
 		this.setState({
 			numberOfGuests: event.target.value,
 		})
+		console.log(this.state)
 	}
 
 	handleSubmit = (event) => {
-
-
-
-
-
+		event.preventDefault();
+		console.log(this.state);
 
 
 
@@ -106,15 +85,6 @@ class NewMenu extends Component{
 		  .catch(function (error) {
 		    console.log(error);
 		  });
-		  
-		  // this.props.history.push('/saved');
-		  this.props.history.push({
-  pathname: '/saved',
-  state: { formattedMenu: formattedMenu }
-})
-
-
-
 	}
 	
 	render(){
@@ -150,9 +120,9 @@ class NewMenu extends Component{
 			<div className="menu-box">
 				<div className="box">
 					<div className="center-box menu-container">
-						<h2> Menu </h2>
+						<h2> SAVED PAGE </h2>
 						<h5> Name: <input type="form-control" /></h5>
-						<h5> Guests #: <input type="form-control" onChange={this.handleGuests} value={this.state.numberOfGuests} /> </h5><br/>
+						<h5> Guests #: <input type="form-control" onChange={this.handleGuests} /> </h5><br/>
 
 						<h4> Choose your Appetizers: </h4>
 						{food.appetizers.map(item=>{
@@ -172,7 +142,6 @@ class NewMenu extends Component{
 							return <div key={item}>
 							<li>
 							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							{this.state[item] == true ? Quantity : null}
 							</li>
 							</div>
 						})}
@@ -184,7 +153,6 @@ class NewMenu extends Component{
 							return <div key={item}>
 							<li>
 							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							{this.state[item] == true ? Quantity : null}
 							</li>
 							</div>
 						})}
@@ -194,7 +162,6 @@ class NewMenu extends Component{
 							return <div key={item}>
 							<li>
 							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							{this.state[item] == true ? Quantity : null}
 							</li>
 							</div>
 						})}
@@ -204,12 +171,10 @@ class NewMenu extends Component{
 							return <div key={item}>
 							<li>
 							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							{this.state[item] == true ? Quantity : null}
 							</li>
 							</div>
 						})}
-						<button type="button" className="btn btn-primary btn-lg center-block" onClick={this.handleSubmit}>Create</button>
-						<Link className="btn btn-primary btn-lg center-block" to="/saved" onClick={this.handleSubmit}>Saved</Link>
+						<button type="button" className="btn btn-primary btn-lg center-block" onClick={this.handleSubmit}><a href="/saved">Create</a></button>
 					</div>
 				</div>
 			</div>

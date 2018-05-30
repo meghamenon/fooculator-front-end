@@ -1,5 +1,5 @@
 body{
-	background-color: yellow;
+	background-color: #FFC85C;
 }
 body, ul {
   margin: 0;
@@ -13,7 +13,7 @@ body, ul {
 	display: flex;
 	color: black;
 	justify-content: center;
-	height: 119px;
+	height: 100px;
 	margin: 0;
 	padding: 0;
 	flex: 6 1 auto;
@@ -25,11 +25,20 @@ body, ul {
 	max-width: 20%;
 }
 
+.the {
+	font-family: fantasy;
+	font-size: 20px;
+	font-weight: bold;
+	font-style: italic;
+	vertical-align: baseline;
+}
+
 .nav-item{
 	display: flex;
 	justify-content: space-around;
 	flex-grow: 1;
-	font-size: 100%;
+	font-size: 20px;
+	padding: 40px;
 }
 
 .container{
@@ -40,8 +49,12 @@ body, ul {
 
 .outer-box{
 	display: flex;
-	height: 600px;
+	height: 510px;
 
+}
+
+.menu-box{
+	display: flex;
 }
 
 .box{
@@ -54,11 +67,11 @@ body, ul {
 
 }
 
-.outer-box .box .center-box{
+.menu-container{
+
 	background-color: white;
-	border: 15px solid black;
+	padding: 20px 50px;
 	text-align: center;
-	padding: 20px 30px;
 }
 
 ul{
@@ -66,8 +79,130 @@ ul{
 }
 
 
+p{
+	font-size: 75px;
+	line-height: 1;
+	margin-bottom: 10px;
+	font-family: fantasy;
+	font-weight: bold;
+	padding: 20px;
+	margin-left: 10px;
+}
+
+.center-box p {
+	margin-right: 100%;
+}
+
+.btn{
+	margin-top: 20px;
+}
+
+a{
+	color: white;
+}
+
+.nav-item a{
+	color: #5EC3FF;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.outer-box #pic1{
+	position: absolute;
+	right: 0px;
+	top: 80px;
+	padding: 0;
+	max-width: 500px;
+	margin: 0px;
+	border: 0px;
+}
+
+#pic2{
+	position: absolute;
+	padding: 0;
+	width: 40px;
+	left: 15%;
+	top: 80px;
+}
+
+#pic3{
+	top:450px;
+	width: 40px;
+	padding: 0;
+	right: 60%;
+	position: absolute;
+}
+
+#pic4 {
+	top:500px;
+	width: 40px;
+	padding: 0;
+	left: 7%;
+	position: absolute;
+}
+
+#pic5{
+
+	top:580px;
+	width: 40px;
+	padding: 0;
+	left: 40%;
+	position: absolute;
+}
+
+#pic6{
+	top:100px;
+	width: 40px;
+	padding: 0;
+	left: 50%;
+	position: absolute;
+
+}
+
+#pic7{
+	top:300px;
+	width: 40px;
+	padding: 0;
+	left: 5%;
+	position: absolute;
+}
+
+#pic8{
+	top:500px;
+	width: 40px;
+	padding: 0;
+	right: 10%;
+	position: absolute;
+}
+
+#pic9{
+	top:500px;
+	width: 40px;
+	left: 10%;
+	padding: 0;
+	position: absolute;
+}
+
 h2{
 	font-size: 70px;
 	line-height: 1;
 	margin-bottom: 10px;
+	font-family: fantasy;
+}
+
+h4{
+	font-family: fantasy;
+	font-weight: bold;
+	color: red;
+	font-size: 25px;
+}
+
+h5{
+	font-family: fantasy;
+}
+
+li {
+	list-style-type: none;
+	font-size: 15px;
+	font-family: fantasy;
 }

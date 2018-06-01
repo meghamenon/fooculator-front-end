@@ -1,46 +1,22 @@
 import React, {Component} from 'react';
 import '../index.css';
-import Save from './Save';
 import Header from '../components/Header';
 import axios from 'axios';
-import { Redirect, Link } from 'react-router-dom'
-
-// const Qty = (props) => {
-// 	console.log(props)
-//   	return (
-//   		<div>
-//           hi
-//   		</div>
-
-//   	)
-
-// }
-
-
-
+import { Redirect, Link } from 'react-router-dom';
+// import SavedMenu from '../components/SavedMenu';
+import Appetizers from '../components/Appetizers';
+import Mains from '../components/Mains';
+import Sides from '../components/Sides';
+import Desserts from '../components/Desserts';
+import Beverages from '../components/Beverages';
+import Name from '../components/Name';
+import Save from './Save';
 class NewMenu extends Component{
 	constructor(props) {
-    super(props);
+    	super(props);
 	    this.state = {
-	    numberOfGuests: null,
-	    cheese: false,
-	    olives: false,
-	    antipasti: false,
-	    crostini: false,
-	    chicken: false,
-	    turkey: false,
-	    steak: false,
-	    ham: false,
-	    soup: false,
-	    salad: false,
-	    rolls: false,
-	    pie: false,
-	    icecream: false,
-	    cake: false,
-	    custard: false,
-	    red: false,
-	    white: false,
-
+	    numberOfGuests: '',
+	    name: ' ',
 	    };
 
   }
@@ -61,16 +37,21 @@ class NewMenu extends Component{
 		this.setState({
 			numberOfGuests: event.target.value,
 		})
+		console.log(event.target.value)
+	}
+
+	onChange = (e) => {
+		this.setState({
+			name: e.target.value
+		})
+	}
+
+	handleTest = (data) => {
+		console.log("TEST DATA ",data);
+		this.setState({appetizers: data})
 	}
 
 	handleSubmit = (event) => {
-
-
-
-
-
-
-
 
 	    const food = {
 	    	appetizers: ['crostini', 'antipasti', 'olives', 'cheese'],
@@ -108,106 +89,33 @@ class NewMenu extends Component{
 		  });
 		  
 		  // this.props.history.push('/saved');
-		  this.props.history.push({
-  pathname: '/saved',
-  state: { formattedMenu: formattedMenu }
-})
-
+	this.props.history.push({
+  		pathname: '/saved',
+  		state: this.state.appetizers
+	})
 
 
 	}
 	
 	render(){
-		const qty = {
-	    	cheese: 2,
-	    	olives: 0.75,
-	    	antipasti: 0.75,
-	    	crostini: 3,
-	    	chicken: 0.5,
-	    	ham: 1,
-	    	turkey: 1, 
-	    	steak: 1, 
-	    	rolls: 3,
-	    	salad: 4,
-	    	soup: 2, 
-	    	pie: 1,
-	    	icecream: 8,
-	    	cake: 1,
-	    	custard: 1,
-	    	red: 0.3,
-	    	white: 0.3
-
-	    }
-	    const food = {
-	    	appetizers: ['crostini', 'antipasti', 'olives', 'cheese'],
-	    	mains: ['chicken', 'steak', 'turkey', 'ham'],
-	    	sides: ['rolls', 'salad', 'soup'],
-	    	desserts: ['pie', 'icecream', 'cake', 'custard'],
-	    	wine: ['red', 'white']
-
-	    }
+		console.log("NEWMENU STATE: ", this.state)
 		return(
 			<div className="menu-box">
 				<div className="box">
 					<div className="center-box menu-container">
 						<h2> Menu </h2>
-						<h5> Name: <input type="form-control" /></h5>
-						<h5> Guests #: <input type="form-control" onChange={this.handleGuests} value={this.state.numberOfGuests} /> </h5><br/>
-
+						<Name onChange={this.onChange} value={this.state.name} name={this.state.name} />
+						<h5> Guests #: <input type="text" className="form-control" onChange={this.handleGuests} value={this.state.numberOfGuests} /> </h5><br/>
 						<h4> Choose your Appetizers: </h4>
-						{food.appetizers.map(item=>{
-							let Quantity = qty[item] * this.state.numberOfGuests
-						return <div key={item}>
-								<li>
-								{item} <input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} />
-								{this.state[item] == true? Quantity : null}
-								</li>
-								</div>
-						})}
-
+						<Appetizers numberOfGuests={this.state.numberOfGuests} test={this.handleTest} />
 						<h4> Choose your Main: </h4>
-
-						{food.mains.map(item=> {
-							let Quantity = qty[item] * this.state.numberOfGuests
-							return <div key={item}>
-							<li>
-							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							{this.state[item] == true ? Quantity : null}
-							</li>
-							</div>
-						})}
-
+						<Mains numberOfGuests={this.state.numberOfGuests} />
 						<h4> Choose your Sides: </h4>
-						{food.sides.map(item=> {
-							let Quantity = qty[item] * this.state.numberOfGuests
-
-							return <div key={item}>
-							<li>
-							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							{this.state[item] == true ? Quantity : null}
-							</li>
-							</div>
-						})}
+						<Sides numberOfGuests={this.state.numberOfGuests} />
 						<h4> Choose your Desserts: </h4>
-						{food.desserts.map(item=> {
-							let Quantity = qty[item] * this.state.numberOfGuests
-							return <div key={item}>
-							<li>
-							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							{this.state[item] == true ? Quantity : null}
-							</li>
-							</div>
-						})}
+						<Desserts numberOfGuests={this.state.numberOfGuests} />
 						<h4> Choose your Beverage: </h4>
-						{food.wine.map(item=> {
-							let Quantity = qty[item] * this.state.numberOfGuests
-							return <div key={item}>
-							<li>
-							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							{this.state[item] == true ? Quantity : null}
-							</li>
-							</div>
-						})}
+						<Beverages numberOfGuests={this.state.numberOfGuests} />
 						<button type="button" className="btn btn-primary btn-lg center-block" onClick={this.handleSubmit}>Create</button>
 						<Link className="btn btn-primary btn-lg center-block" to="/saved" onClick={this.handleSubmit}>Saved</Link>
 					</div>

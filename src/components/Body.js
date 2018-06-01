@@ -1,17 +1,17 @@
 import React, {Component} from 'react';
 import '../index.css';
 
-class Main extends Component{
+class Body extends Component{
 	render(){
 		return(
 		<div className="outer-box">
 			<img id="pic1" src="pic1.png" />
-			 <img id="pic2" src="cooking-tool-1.svg" />
-			 <img id="pic3" src="cooking-tool-1.svg" />
-			 <img id="pic6" src="cooking-tool-2.svg" />
-			 <img id="pic7" src="cooking-tool-2.svg" />
-			  <img id="pic8" src="cooking-tool-2.svg" />
-			  <img id="pic9" src="cooking-tool-1.svg" />
+			 <img id="pic2" src="cooking-tool1.png" />
+			 <img id="pic3" src="cooking-tool1.png" />
+			 <img id="pic6" src="cooking-tool2.png" />
+			 <img id="pic7" src="cooking-tool2.png" />
+			  <img id="pic8" src="cooking-tool2.png" />
+			  <img id="pic9" src="cooking-tool1.png" />
 				<div className="box">
 			      	<div className="center-box">
 			        	<p> 
@@ -27,4 +27,4 @@ class Main extends Component{
 }
 
 
-export default Main
+export default Body

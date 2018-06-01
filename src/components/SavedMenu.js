@@ -13,11 +13,12 @@ class SavedMenu extends Component{
   	.then(results => {
   			return results.json();
   		}).then(data => {
-  			let appetizers = data.results.map((item) => {
+  			console.log(1111, data)
+  			let appetizers = data.appetizers.map((item) => {
   				return (
 
   					<div key={item}>
-  					{item.appetizers}
+  					{item}
   					</div>
   				)
   			})
@@ -31,9 +32,11 @@ class SavedMenu extends Component{
 
 render(){
 	return (
-		<div>
-			<div>
+		<div className="menu-box">
+			<div className="box">
+				<div className="center-box menu-container">
 				{this.state.appetizers}
+				</div>
 			</div>
 		</div>
 

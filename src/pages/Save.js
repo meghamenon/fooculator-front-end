@@ -1,180 +1,77 @@
 import React, {Component} from 'react';
+import Appetizers from '../components/Appetizers';
+import Mains from '../components/Mains';
+import Sides from '../components/Sides';
+import Desserts from '../components/Desserts';
+import Beverages from '../components/Beverages';
+import { Redirect, Link } from 'react-router-dom';
+import Name from '../components/Name';
 import '../index.css';
-// import SavedMenu from '../components/SavedMenu';
-import Header from '../components/Header';
-import axios from 'axios';
-
-// const Qty = (props) => {
-// 	console.log(props)
-//   	return (
-//   		<div>
-//           hi
-//   		</div>
-
-//   	)
-
-// }
 
 
-
-class NewMenu extends Component{
+class Save extends Component{
 	constructor(props) {
-    super(props)
-
-
-	    console.log(props)
+    super(props);
+	    this.state = {
+	   		 name: ''
+	    };
 
   }
 
-	handleChange = (event) => {
-		let name = event.target.name;
-		if (this.state[name] === false) {
-			this.setState()
+  componentDidMount() {
+  	let results = [];
+  	for (let app in this.props.location.state) {
+			results.push({ [app]: this.props.location.state[app] })
 		}
+	this.setState({ appetizers: results })
+  }
 
+  update = (e) => {
+		console.log(e.target.value);
+		this.props.onUpdate(e.target.value);
 		this.setState({
-			[name]: !this.state[name]
+			name: e.target.value
 		})
-		console.log(this.state)
-	}
+	};
 
-	handleGuests = (event) => {
-		this.setState({
-			numberOfGuests: event.target.value,
-		})
-		console.log(this.state)
-	}
-
-	handleSubmit = (event) => {
-		event.preventDefault();
-		console.log(this.state);
-
-
-
-	    const food = {
-	    	appetizers: ['crostini', 'antipasti', 'olives', 'cheese'],
-	    	mains: ['chicken', 'steak', 'turkey', 'ham'],
-	    	sides: ['rolls', 'salad', 'soup'],
-	    	desserts: ['pie', 'icecream', 'cake', 'custard'],
-	    	wine: ['red', 'white']
-	    }
-
-	    let state = this.state;
-
-
-		let formattedMenu = {
-		  appetizers: [],
-		  mains: [],
-		  sides: [],
-		  desserts: [],
-		  wine: []
-		}
-
-		for (let key in formattedMenu) {
-		    formattedMenu[key] = food[key].filter(item => {
-		    	if (this.state[item] === true) {
-		    		return item;
-		    	}
-		    })
-		}
-
-		axios.post('http://localhost:8080/api/menu', formattedMenu)
-		  .then(function (response) {
-		    console.log(response);
-		  })
-		  .catch(function (error) {
-		    console.log(error);
-		  });
-	}
-	
 	render(){
+		// console.log("SAVED STATE: ", this.state.[Object.keys()])
+
+		console.log("SAVED PROPS: ", this.props)
+
 		const qty = {
 	    	cheese: 2,
 	    	olives: 0.75,
 	    	antipasti: 0.75,
-	    	crostini: 3,
-	    	chicken: 0.5,
-	    	ham: 1,
-	    	turkey: 1, 
-	    	steak: 1, 
-	    	rolls: 3,
-	    	salad: 4,
-	    	soup: 2, 
-	    	pie: 1,
-	    	icecream: 8,
-	    	cake: 1,
-	    	custard: 1,
-	    	red: 0.3,
-	    	white: 0.3
+	    	crostini: 3
 
 	    }
-	    const food = {
-	    	appetizers: ['crostini', 'antipasti', 'olives', 'cheese'],
-	    	mains: ['chicken', 'steak', 'turkey', 'ham'],
-	    	sides: ['rolls', 'salad', 'soup'],
-	    	desserts: ['pie', 'icecream', 'cake', 'custard'],
-	    	wine: ['red', 'white']
 
-	    }
+	 	let results = [];
+		for (let app in this.props.location.state) {
+			results.push(app + ' ' + qty[app] * this.state.numberOfGuests + ' ')
+		}
+
+		console.log("RESULTS", results)
 		return(
 			<div className="menu-box">
 				<div className="box">
 					<div className="center-box menu-container">
-						<h2> SAVED PAGE </h2>
-						<h5> Name: <input type="form-control" /></h5>
-						<h5> Guests #: <input type="form-control" onChange={this.handleGuests} /> </h5><br/>
-
+						<h2> Saved Menu </h2>
+						<Name />
+						<h5> Guests #: </h5><br/>
 						<h4> Choose your Appetizers: </h4>
-						{food.appetizers.map(item=>{
-							let Quantity = qty[item] * this.state.numberOfGuests
-						return <div key={item}>
-								<li>
-								{item} <input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} />
-								{this.state[item] == true? Quantity : null}
-								</li>
-								</div>
-						})}
-
+						{ results }
 						<h4> Choose your Main: </h4>
-
-						{food.mains.map(item=> {
-							let Quantity = qty[item] * this.state.numberOfGuests
-							return <div key={item}>
-							<li>
-							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							</li>
-							</div>
-						})}
-
+						<Mains />
 						<h4> Choose your Sides: </h4>
-						{food.sides.map(item=> {
-							let Quantity = qty[item] * this.state.numberOfGuests
-
-							return <div key={item}>
-							<li>
-							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							</li>
-							</div>
-						})}
+						<Sides />
 						<h4> Choose your Desserts: </h4>
-						{food.desserts.map(item=> {
-							let Quantity = qty[item] * this.state.numberOfGuests
-							return <div key={item}>
-							<li>
-							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							</li>
-							</div>
-						})}
+						<Desserts />
 						<h4> Choose your Beverage: </h4>
-						{food.wine.map(item=> {
-							let Quantity = qty[item] * this.state.numberOfGuests
-							return <div key={item}>
-							<li>
-							{item}<input type="checkbox" className="form-check-input" onChange={this.handleChange} name={item} value={this.state[item]} /> 
-							</li>
-							</div>
-						})}
-						<button type="button" className="btn btn-primary btn-lg center-block" onClick={this.handleSubmit}><a href="/saved">Create</a></button>
+						<Beverages />
+						<button type="button" className="btn btn-primary btn-lg center-block" onClick={this.handleSubmit}>Create</button>
+						<Link className="btn btn-primary btn-lg center-block" to="/saved" onClick={this.handleSubmit}>Saved</Link>
 					</div>
 				</div>
 			</div>
@@ -182,4 +79,4 @@ class NewMenu extends Component{
 	}
 }
 
-export default NewMenu;
+export default Save 

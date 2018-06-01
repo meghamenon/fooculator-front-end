@@ -86,7 +86,7 @@ p{
 	font-family: fantasy;
 	font-weight: bold;
 	padding: 20px;
-	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .center-box p {
@@ -152,7 +152,7 @@ a{
 
 #pic6{
 	top:100px;
-	width: 40px;
+	width: 60px;
 	padding: 0;
 	left: 50%;
 	position: absolute;
@@ -161,7 +161,7 @@ a{
 
 #pic7{
 	top:300px;
-	width: 40px;
+	width: 60px;
 	padding: 0;
 	left: 5%;
 	position: absolute;
@@ -169,7 +169,7 @@ a{
 
 #pic8{
 	top:500px;
-	width: 40px;
+	width: 60px;
 	padding: 0;
 	right: 10%;
 	position: absolute;
